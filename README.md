@@ -25,7 +25,7 @@ cp .env.example .env
 npm run dev
 ```
 
-Without a deployed address, the site runs in preview mode: case creation is saved to local browser storage and sample cases are illustrative, not on-chain records.
+Without a deployed contract address, the site displays no case records and blocks case creation. It does not seed sample cases or save off-chain substitute cases.
 
 ## Deploy the Intelligent Contract
 

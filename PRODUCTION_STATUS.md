@@ -1,6 +1,6 @@
 # Production status — ReturnGuard
 
-**Status: implementation scaffold / not yet deployed.** The frontend supports a polished preview experience and browser-local demo cases. On-chain actions require a deployed contract address and a compatible wallet on GenLayer Studio Next.
+**Status: implementation scaffold / not yet deployed.** The frontend supports a polished preview experience and on-chain cases only. On-chain actions require a deployed contract address and a compatible wallet on GenLayer Studio Next.
 
 ## Before hackathon submission
 

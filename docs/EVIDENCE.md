@@ -4,7 +4,7 @@
 2. Evidence URLs must be public HTTPS URLs. During resolution, validators attempt to read the page and locate the normalized policy quote.
 3. Validators agree on a short excerpt around the quote. The excerpt and its SHA-256 hash are saved on-chain as `evidence_excerpt` and `evidence_hash`.
 4. If the page is unreadable or the exact quote cannot be located, the result is inconclusive and both bonds are credited back. Unclear or unparsable model verdicts are also treated as inconclusive.
-5. The UI labels preview data as illustrative/local. It must not imply that a demo case or an off-chain browser record has been verified by GenLayer.
+5. The UI does not display seeded demo cases or treat browser-local records as on-chain records. Only records read from the deployed contract are displayed.
 
 ## Deployment address record
 
