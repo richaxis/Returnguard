@@ -25,12 +25,12 @@ cp .env.example .env
 npm run dev
 ```
 
-Without a deployed contract address, the site displays an empty state and blocks case creation. It does not create local placeholder cases.
+Without a deployed address, the site runs in preview mode: case creation is saved to local browser storage and sample cases are illustrative, not on-chain records.
 
 ## Deploy the Intelligent Contract
 
 Network: **GenLayer Studio Next**  
-RPC: `https://studio-dev.genlayer.com/api`  
+RPC: `https://studio-next.genlayer.com/api`  
 Chain ID: `61997`  
 Explorer: `https://explorer-studio-dev.genlayer.com/`
 
@@ -52,7 +52,7 @@ Never put `DEPLOYER_PRIVATE_KEY` in Vercel or commit it. The footer shows the fu
 
 ## Fee handling
 
-Frontend writes use the documented GenLayerJS browser-wallet flow: estimate fees, request wallet approval/signing, submit, and wait for finalization. The app must still be tested with the actual deployed contract and current Studio Next fee policy.
+The fee helper in `lib/fees.js` clamps every phase-time allocation to the valid `30..600` range, including scaled retries. The method profile in `lib/fee-profile.js` is a starting budget, not a promise of measured production fees. Transactions retry on `BudgetTooLow`; execution status is checked after acceptance.
 
 ## Contract safeguards
 
@@ -74,10 +74,3 @@ npm run build
 ```
 
 Deploy to Studio Next and verify the complete wallet → create claim → challenge → resolve → withdraw flow before submitting to the hackathon.
-
-
-## Live wallet and case data
-
-The UI does not seed fictional cases and does not save new cases locally. It reads claim records from the configured ReturnGuard contract. Connect an injected EIP-1193 wallet (for example MetaMask), switch to Studio Next (chain ID `61997`), and use GEN for both the claim bond and network fees. Writes use GenLayerJS to estimate fees, request wallet approval/signature, submit, and track the GenLayer transaction. The form now shows the current step (wallet/network check, fee estimate, wallet approval, or GenLayer finalization) rather than staying on a generic “Waiting for wallet…” message. Disconnect clears the app's selected account; wallet providers may not support revoking the site's underlying permission.
-
-The contract address must be set as `VITE_CONTRACT_ADDRESS` in Vercel after deploying `chain-and-site/contracts/return_guard.py`. The contract must be tested on the target network before this application is treated as ready for real users.
