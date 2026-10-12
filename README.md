@@ -52,7 +52,7 @@ Never put `DEPLOYER_PRIVATE_KEY` in Vercel or commit it. The footer shows the fu
 
 ## Fee handling
 
-Frontend writes use `@genlayer/transaction-kit@0.1.0-rc.2` for live fee quoting, fee-policy verification, wallet approval/signing and lifecycle tracking. `lib/fees.js` remains a legacy helper and is not the active browser write path. The app must still be tested with the actual deployed contract and current Studio Next fee policy.
+Frontend writes use the documented GenLayerJS browser-wallet flow: estimate fees, request wallet approval/signing, submit, and wait for finalization. The app must still be tested with the actual deployed contract and current Studio Next fee policy.
 
 ## Contract safeguards
 
@@ -78,6 +78,6 @@ Deploy to Studio Next and verify the complete wallet → create claim → challe
 
 ## Live wallet and case data
 
-The UI does not seed fictional cases and does not save new cases locally. It reads claim records from the configured ReturnGuard contract. Connect an injected EIP-1193 wallet (for example MetaMask), switch to Studio Next (chain ID `61997`), and use GEN for both the claim bond and network fees. Writes use Transaction Kit RC2 to quote fees, request wallet approval/signature, submit, and track the GenLayer transaction. Disconnect clears the app's selected account; wallet providers may not support revoking the site's underlying permission.
+The UI does not seed fictional cases and does not save new cases locally. It reads claim records from the configured ReturnGuard contract. Connect an injected EIP-1193 wallet (for example MetaMask), switch to Studio Next (chain ID `61997`), and use GEN for both the claim bond and network fees. Writes use GenLayerJS to estimate fees, request wallet approval/signature, submit, and track the GenLayer transaction. The form now shows the current step (wallet/network check, fee estimate, wallet approval, or GenLayer finalization) rather than staying on a generic “Waiting for wallet…” message. Disconnect clears the app's selected account; wallet providers may not support revoking the site's underlying permission.
 
 The contract address must be set as `VITE_CONTRACT_ADDRESS` in Vercel after deploying `chain-and-site/contracts/return_guard.py`. The contract must be tested on the target network before this application is treated as ready for real users.

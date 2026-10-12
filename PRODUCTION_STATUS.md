@@ -1,12 +1,12 @@
 # Production status — ReturnGuard
 
-**Status: implementation scaffold / not yet deployed.** The frontend is configured for live on-chain claims only: hard-coded sample claims and browser-local case creation are disabled. Wallet writes use the GenLayer Transaction Kit RC2 flow for fee quoting, wallet signing, submission, and transaction tracking. The app is not production-ready until a real contract address is configured and the live create → challenge → resolve → withdraw flow is verified.
+**Status: implementation scaffold / not yet deployed.** The frontend is configured for live on-chain claims only: hard-coded sample claims and browser-local case creation are disabled. Wallet writes use the documented GenLayerJS browser-wallet flow for fee quoting, wallet signing, submission, and transaction tracking. The app is not production-ready until a real contract address is configured and the live create → challenge → resolve → withdraw flow is verified.
 
 ## Before hackathon submission
 
 - [ ] Deploy `chain-and-site/contracts/return_guard.py` to Studio Next (chain ID `61997`).
 - [ ] Confirm the deployed contract passes a live create → challenge → resolve → withdraw walkthrough.
-- [ ] Confirm write actions use `@genlayer/transaction-kit@0.1.0-rc.2` for current fee quoting and wallet signing; confirm the live quote is verified and the transaction reaches a final execution result.
+- [ ] Confirm write actions estimate current fees, prompt the connected wallet for signing, and reach a final execution result on the deployed contract.
 - [ ] Record the exact full contract address in Vercel `VITE_CONTRACT_ADDRESS`, `public/deployment.json`, `docs/EVIDENCE.md`, and this file.
 - [ ] Verify `footer-address` renders that same full address in the deployed site.
 - [ ] Run `make -C chain-and-site test`, `npm test`, and `npm run build`.
